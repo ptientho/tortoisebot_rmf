@@ -9,49 +9,52 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Check out this repo
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Build image
-      run: |
-        cd docker
-        chmod +x build.sh
-        ./build.sh
-      
+        run: |
+          cd docker
+          chmod +x build.sh
+          ./build.sh
+
       - name: Setup ROS2 Humble
-      uses: ros-tooling/setup-ros@v0.7
-      with:
-        required-ros-distributions: humble
-      run: sudo apt upgrade -y && sudo apt update && rosdep update
-      
+        uses: ros-tooling/setup-ros@v0.7
+        with:
+          required-ros-distributions: humble
+
+      - name: Upgrade and Update
+        run: |
+          sudo apt update && sudo apt upgrade -y
+          rosdep update
+
       - name: Install deps
-      run: |
-        cd docker
-        sudo apt-get update
-        sudo apt-get install -y --no-install-recommends $(cat requirements.txt) && rm -rf /var/lib/apt/lists/*
+        run: |
+          cd docker
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends $(cat requirements.txt)
+          sudo rm -rf /var/lib/apt/lists/*
 
       - name: Install Gazebo Classic
-      run: |
-        sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
-        wget https://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
-        sudo apt-get update
-        sudo apt-get install gazebo11 -y
+        run: |
+          sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" > /etc/apt/sources.list.d/gazebo-stable.list'
+          wget https://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
+          sudo apt-get update
+          sudo apt-get install -y gazebo11
 
       - name: Install Gazebo Fortress
-      run: |
-        sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
-        wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
-        sudo apt-get update
-        sudo apt-get install ignition-fortress -y
+        run: |
+          sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" > /etc/apt/sources.list.d/gazebo-fortress.list'
+          wget https://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
+          sudo apt-get update
+          sudo apt-get install -y ignition-fortress
 
       - name: Build ROS2 Workspace
-      run: |
-        mkdir -p $HOME/ros_deps_ws/src
-        cd $HOME/ros_deps_ws/src
-        git clone -b ros2-humble https://github.com/rigbetellabs/tortoisebot.git
-        . /opt/ros/humble/setup.sh && rosdep install -y -i --from-paths src
-        colcon build 
-
-
-
+        run: |
+          mkdir -p $HOME/ros_deps_ws/src
+          cd $HOME/ros_deps_ws/src
+          git clone -b ros2-humble https://github.com/rigbetellabs/tortoisebot.git
+          source /opt/ros/humble/setup.sh
+          rosdep install -y -i --from-paths src
+          colcon build
