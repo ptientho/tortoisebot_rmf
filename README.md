@@ -11,8 +11,10 @@
 mkdir -p $HOME/ros_ws/src
 cd $HOME/ros_ws/src
 git clone https://github.com/ptientho/tortoisebot_rmf.git
+```
 
-cd $HOME/ros_ws/src/tortoisebot/docker
+```
+cd $HOME/ros_ws/src/tortoisebot_rmf/docker
 sudo apt-get install -y --no-install-recommends $(cat requirements.txt)
 sudo rm -rf /var/lib/apt/lists/*
 ```
