@@ -49,9 +49,7 @@ chmod +x "${DEPS_SCRIPT_PATH}"
 
 echo "Running dependency helper (this will print variables like BASE_DEPENDENCIES and GAZEBO_BASE_DEPENDENCIES)..."
 # The tutorial example: GAZEBO_MAJOR_VERSION=version ROS_DISTRO=dummy . /tmp/dependencies.sh
-# Use same pattern; user may set ROS_DISTRO in environment or leave empty/dummy.
-: "${ROS_DISTRO:=humble}"
-GAZEBO_MAJOR_VERSION="${GAZEBO_MAJOR_VERSION}" ROS_DISTRO="${ROS_DISTRO}" . "${DEPS_SCRIPT_PATH}"
+GAZEBO_MAJOR_VERSION="${GAZEBO_MAJOR_VERSION}" ROS_DISTRO=humble . "${DEPS_SCRIPT_PATH}"
 
 if [[ -n "${BASE_DEPENDENCIES-}" || -n "${GAZEBO_BASE_DEPENDENCIES-}" ]]; then
   echo "Installing packages reported by dependencies helper..."
