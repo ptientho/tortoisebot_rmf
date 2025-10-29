@@ -38,23 +38,18 @@ sudo
 tmux
 wget
 xterm
-
-# SDFormat
 libboost-system-dev
 libtinyxml-dev
 libxml2-utils
 ruby-dev
 ruby
-# Ign Messages
 libprotoc-dev
 libprotobuf-dev
 protobuf-compiler
-# Ign Fuel Tools
 libzip-dev
 libjsoncpp-dev
 libcurl4-openssl-dev
 libyaml-dev
-# Ign Common
 libfreeimage-dev
 libtinyxml2-dev
 uuid-dev
