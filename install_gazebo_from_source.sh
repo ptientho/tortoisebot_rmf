@@ -69,12 +69,12 @@ DART_NOTE
 
 # Install the listed dependencies (from source, tutorial style)
 echo "Installing Gazebo 11 dependencies from source..."
-cd "$BUILD_ROOT"
-mkdir -p deps_src
-cd deps_src
+mkdir -p "$BUILD_ROOT"/deps_src
+cd "$BUILD_ROOT"/deps_src
 
-# SDFormat 11
-git clone -b sdf11 https://github.com/osrf/sdformat.git
+
+# SDFormat 9
+git clone -b sdf9 https://github.com/osrf/sdformat.git
 cd sdformat
 mkdir -p build && cd build
 cmake -DCMAKE_INSTALL_PREFIX="$INSTALL_PREFIX" ..
@@ -83,8 +83,8 @@ sudo make install
 cd "$BUILD_ROOT/deps_src"
 
 # Ignition Math 6
-git clone -b ignition-math6 https://github.com/gazebosim/ignition-math.git
-cd ignition-math
+git clone -b ign-math6 https://github.com/ignitionrobotics/ign-math
+cd ign-math
 mkdir -p build && cd build
 cmake -DCMAKE_INSTALL_PREFIX="$INSTALL_PREFIX" ..
 make -j"$(nproc)"
@@ -92,17 +92,35 @@ sudo make install
 cd "$BUILD_ROOT/deps_src"
 
 # Ignition Transport 8
-git clone -b ignition-transport8 https://github.com/gazebosim/ignition-transport.git
-cd ignition-transport
+git clone -b ign-transport8 https://github.com/gazebosim/gz-transport.git
+cd gz-transport
 mkdir -p build && cd build
 cmake -DCMAKE_INSTALL_PREFIX="$INSTALL_PREFIX" ..
 make -j"$(nproc)"
 sudo make install
 cd "$BUILD_ROOT/deps_src"
 
-# Ignition Messages 7
-git clone -b ignition-msgs7 https://github.com/gazebosim/ignition-msgs.git
-cd ignition-msgs
+# Ignition Messages 5
+git clone -b ign-msgs5 https://github.com/gazebosim/gz-msgs.git
+cd gz-msgs
+mkdir -p build && cd build
+cmake -DCMAKE_INSTALL_PREFIX="$INSTALL_PREFIX" ..
+make -j"$(nproc)"
+sudo make install
+cd "$BUILD_ROOT/deps_src"
+
+# Ignition Fuel Tools 4
+git clone -b ign-fuel-tools4 https://github.com/gazebosim/gz-fuel-tools.git
+cd gz-fuel-tools
+mkdir -p build && cd build
+cmake -DCMAKE_INSTALL_PREFIX="$INSTALL_PREFIX" ..
+make -j"$(nproc)"
+sudo make install
+cd "$BUILD_ROOT/deps_src"
+
+# Ignition Common 3
+git clone -b ign-common3 https://github.com/gazebosim/gz-common.git
+cd gz-common
 mkdir -p build && cd build
 cmake -DCMAKE_INSTALL_PREFIX="$INSTALL_PREFIX" ..
 make -j"$(nproc)"

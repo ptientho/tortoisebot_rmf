@@ -2,6 +2,7 @@ apt-utils
 bash-completion
 build-essential
 curl
+cmake
 debian-archive-keyring
 debian-keyring
 evtest
@@ -16,6 +17,7 @@ lsb-release
 mercurial
 nano
 openssh-server
+pkg-config
 python3
 python3-pip
 python3-setuptools
@@ -36,3 +38,29 @@ sudo
 tmux
 wget
 xterm
+
+# SDFormat
+libboost-system-dev
+libtinyxml-dev
+libxml2-utils
+ruby-dev
+ruby
+# Ign Messages
+libprotoc-dev
+libprotobuf-dev
+protobuf-compiler
+# Ign Fuel Tools
+libzip-dev
+libjsoncpp-dev
+libcurl4-openssl-dev
+libyaml-dev
+# Ign Common
+libfreeimage-dev
+libtinyxml2-dev
+uuid-dev
+libgts-dev
+libavdevice-dev
+libavformat-dev
+libavcodec-dev
+libswscale-dev
+libavutil-dev
