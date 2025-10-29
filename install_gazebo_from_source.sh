@@ -66,15 +66,57 @@ cat <<'DART_NOTE'
 # (Only enable if you know you need DART — tutorial warns about potential ROS conflicts)
 DART_NOTE
 
+
+# Install the listed dependencies (from source, tutorial style)
+echo "Installing Gazebo 11 dependencies from source..."
+cd "$BUILD_ROOT"
+mkdir -p deps_src
+cd deps_src
+
+# SDFormat 11
+git clone -b sdf11 https://github.com/osrf/sdformat.git
+cd sdformat
+mkdir -p build && cd build
+cmake -DCMAKE_INSTALL_PREFIX="$INSTALL_PREFIX" ..
+make -j"$(nproc)"
+sudo make install
+cd "$BUILD_ROOT/deps_src"
+
+# Ignition Math 6
+git clone -b ignition-math6 https://github.com/gazebosim/ignition-math.git
+cd ignition-math
+mkdir -p build && cd build
+cmake -DCMAKE_INSTALL_PREFIX="$INSTALL_PREFIX" ..
+make -j"$(nproc)"
+sudo make install
+cd "$BUILD_ROOT/deps_src"
+
+# Ignition Transport 8
+git clone -b ignition-transport8 https://github.com/gazebosim/ignition-transport.git
+cd ignition-transport
+mkdir -p build && cd build
+cmake -DCMAKE_INSTALL_PREFIX="$INSTALL_PREFIX" ..
+make -j"$(nproc)"
+sudo make install
+cd "$BUILD_ROOT/deps_src"
+
+# Ignition Messages 7
+git clone -b ignition-msgs7 https://github.com/gazebosim/ignition-msgs.git
+cd ignition-msgs
+mkdir -p build && cd build
+cmake -DCMAKE_INSTALL_PREFIX="$INSTALL_PREFIX" ..
+make -j"$(nproc)"
+sudo make install
+cd "$BUILD_ROOT/deps_src"
+
 # Steps: git clone https://github.com/osrf/gazebo /tmp/gazebo
 echo "Preparing source tree under ${BUILD_ROOT}..."
-rm -rf "${BUILD_ROOT}"
-mkdir -p "${BUILD_ROOT}"
-cd "${BUILD_ROOT}"
+rm -rf "${BUILD_ROOT}/gazebo"
+mkdir -p "${BUILD_ROOT}/gazebo"
 
 echo "Cloning gazebo repository (as tutorial: git clone https://github.com/osrf/gazebo /tmp/gazebo)..."
-git clone https://github.com/osrf/gazebo "${BUILD_ROOT}"
-cd "${BUILD_ROOT}"
+git clone https://github.com/osrf/gazebo "${BUILD_ROOT}/gazebo"
+cd "${BUILD_ROOT}/gazebo"
 
 # Optional: checkout a stable branch matching major version (tutorial suggests gazebo6 branch as example)
 BRANCH_NAME="gazebo${GAZEBO_MAJOR_VERSION}"
