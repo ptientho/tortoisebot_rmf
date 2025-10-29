@@ -3,14 +3,13 @@
 # This script follows the Gazebo Classic "Install from source (Ubuntu)" tutorial:
 # https://classic.gazebosim.org/tutorials?tut=install_from_source
 #
-set -euo pipefail
+set -eo pipefail
 IFS=$'\n\t'
 
 # Configurable variables (kept minimal and tutorial-compatible)
 GAZEBO_MAJOR_VERSION=${GAZEBO_MAJOR_VERSION:-11}     # tutorial examples use generic 'version'
 INSTALL_PREFIX=${INSTALL_PREFIX:-/usr/local}        # tutorial default for source install
 BUILD_ROOT=${BUILD_ROOT:-$HOME/tmp/gazebo}     # where we'll clone & build
-DISTRO=$(lsb_release -cs)
 DEPS_SCRIPT_URL="https://raw.githubusercontent.com/ignition-tooling/release-tools/master/jenkins-scripts/lib/dependencies_archive.sh"
 DEPS_SCRIPT_PATH="/tmp/dependencies.sh"
 
