@@ -7,15 +7,6 @@ IFS=$'\n\t'
 sudo apt update && sudo apt upgrade -y
 rosdep update
 
-# Install deps
-mkdir -p $HOME/ros_ws/src
-cd $HOME/ros_ws/src
-git clone https://github.com/ptientho/tortoisebot_rmf.git
-
-cd $HOME/ros_ws/src/tortoisebot/docker
-sudo apt-get install -y --no-install-recommends $(cat requirements.txt)
-sudo rm -rf /var/lib/apt/lists/*
-
 # Install ros2 humble
 cd $HOME/ros_ws/src/tortoisebot
 chmod +x install_ros_humble.sh
