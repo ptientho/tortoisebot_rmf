@@ -2,7 +2,7 @@ name: Install packages for Tortoisebot
 
 on:
   push:
-    branches: [ main ]
+    branches: [ install-packages ]
 
 jobs:
   install-packages:
@@ -50,5 +50,6 @@ jobs:
           cd $HOME/ros_deps_ws/src
           git clone -b ros2-humble https://github.com/rigbetellabs/tortoisebot.git
           source /opt/ros/humble/setup.sh
+          cd $HOME/ros_deps_ws
           rosdep install -y -i --from-paths src
           colcon build
