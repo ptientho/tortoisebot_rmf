@@ -41,15 +41,12 @@ sudo apt-get update
 # GAZEBO_MAJOR_VERSION and ROS_DISTRO set, then install the listed packages.
 echo "Downloading dependencies helper script (dependencies_archive.sh) as in tutorial..."
 if command -v wget >/dev/null 2>&1; then
-  wget -q -O "${DEPS_SCRIPT_PATH}" "${DEPS_SCRIPT_URL}"
+  wget "${DEPS_SCRIPT_URL}" -O "${DEPS_SCRIPT_PATH}"
+  GAZEBO_MAJOR_VERSION="${GAZEBO_MAJOR_VERSION}" ROS_DISTRO=humble . "${DEPS_SCRIPT_PATH}" 
 else
-  curl -fsSL -o "${DEPS_SCRIPT_PATH}" "${DEPS_SCRIPT_URL}"
+  curl "${DEPS_SCRIPT_URL}" -o "${DEPS_SCRIPT_PATH}"
+  GAZEBO_MAJOR_VERSION="${GAZEBO_MAJOR_VERSION}" ROS_DISTRO=humble . "${DEPS_SCRIPT_PATH}" 
 fi
-chmod +x "${DEPS_SCRIPT_PATH}"
-
-echo "Running dependency helper (this will print variables like BASE_DEPENDENCIES and GAZEBO_BASE_DEPENDENCIES)..."
-# The tutorial example: GAZEBO_MAJOR_VERSION=version ROS_DISTRO=dummy . /tmp/dependencies.sh
-GAZEBO_MAJOR_VERSION="${GAZEBO_MAJOR_VERSION}" ROS_DISTRO=humble . "${DEPS_SCRIPT_PATH}"
 
 if [[ -n "${BASE_DEPENDENCIES-}" || -n "${GAZEBO_BASE_DEPENDENCIES-}" ]]; then
   echo "Installing packages reported by dependencies helper..."
