@@ -7,17 +7,13 @@ on:
 jobs:
   install-packages:
     runs-on: ubuntu-22.04
+    container:
+      image: ubuntu-22.04
     steps:
       - name: Check out this repo
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Build image
-        run: |
-          cd docker
-          chmod +x build.sh
-          ./build.sh
 
       - name: Setup ROS2 Humble
         uses: ros-tooling/setup-ros@v0.7
