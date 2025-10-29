@@ -14,12 +14,6 @@ COPY docker/requirements.txt .
 RUN apt-get update && apt-get install --no-install-recommends -y $(cat requirements.txt) && rm -rf /var/lib/apt/lists/*
 RUN rm requirements.txt
 
-# Install Gazebo Classic
-RUN sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
-RUN wget https://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
-RUN sudo apt-get update
-RUN sudo apt-get install gazebo11 -y
-
 # Install Gazebo Fortress
 RUN sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-fortress.list'
 RUN wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
