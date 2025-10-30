@@ -31,6 +31,7 @@ ros-humble-xacro
 ros-humble-nav2*
 ros-humble-urdf
 ros-humble-tf-transformations
+ros-humble-v4l2-camera
 software-properties-common
 sudo
 tmux
