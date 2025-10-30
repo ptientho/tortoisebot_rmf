@@ -1,6 +1,6 @@
 # Create ROS2 workspace
 export ROS_DISTRO=humble
-source /opt/ros/humble/setup.bash
+source /opt/ros/$ROS_DISTRO/setup.bash
 mkdir -p ~/ros_dep_ws/src
 cd ~/ros_dep_ws/
 colcon build
@@ -19,7 +19,7 @@ sudo make install
 # Build packages
 cd ~/ros_dep_ws
 rosdep install -y -i --from-paths src
-colcon build --parallel-workers 2
+colcon build --parallel-workers 1
 
-source /opt/ros/humble/setup.bash
+source /opt/ros/$ROS_DISTRO/setup.bash
 source ~/ros_dep_ws/install/setup.bash
