@@ -25,7 +25,6 @@ ros-humble-joint-state-publisher
 ros-humble-robot-state-publisher
 ros-humble-cartographer
 ros-humble-cartographer-ros
-ros-humble-gazebo-plugins
 ros-humble-teleop-twist-keyboard
 ros-humble-teleop-twist-joy
 ros-humble-xacro
