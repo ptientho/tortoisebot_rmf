@@ -6,16 +6,7 @@ colcon build
 source ~/ros_dep_ws/install/setup.bash
 
 # Install dependencies
-sudo apt install -y \
-    ros-$ROS_DISTRO-joint-state-publisher \
-    ros-$ROS_DISTRO-robot-state-publisher \
-    ros-$ROS_DISTRO-cartographer \
-    ros-$ROS_DISTRO-cartographer-ros \
-    ros-$ROS_DISTRO-teleop-twist-keyboard \
-    ros-$ROS_DISTRO-teleop-twist-joy \
-    ros-$ROS_DISTRO-xacro \
-    ros-$ROS_DISTRO-nav2* \
-    ros-$ROS_DISTRO-urdf
+sudo apt install -y ros-$ROS_DISTRO-gazebo-plugin 
 
 # Clone TortoiseBot repository
 cd ~/ros_dep_ws/src
