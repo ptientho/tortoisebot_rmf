@@ -1,4 +1,5 @@
 # Create ROS2 workspace
+export ROS_DISTRO=humble
 source /opt/ros/humble/setup.bash
 mkdir -p ~/ros_dep_ws/src
 cd ~/ros_dep_ws/
@@ -10,7 +11,7 @@ cd ~/ros_dep_ws/src
 git clone -b ros2-humble https://github.com/rigbetellabs/tortoisebot.git
 
 # Build and install ydlidar_sdk
-cd ~/ros_dep_ws/src/YDLidar-SDK/build
+cd ~/ros_dep_ws/src/tortoisebot/YDLidar-SDK/build
 cmake ..
 make
 sudo make install
@@ -18,7 +19,7 @@ sudo make install
 # Build packages
 cd ~/ros_dep_ws
 rosdep install -y -i --from-paths src
-colcon build
+colcon build --parallel-workers 2
 
 source /opt/ros/humble/setup.bash
 source ~/ros_dep_ws/install/setup.bash
