@@ -17,7 +17,7 @@ fi
 
 # Install deps
 cd $HOME/ros_ws/src/$PROJECT_NAME/docker
-sudo apt update && sudo apt upgrade -y
+sudo apt update && sudo apt upgrade -y --fix-missing
 sudo apt-get install -y --no-install-recommends $(cat requirements.txt)
 sudo rm -rf /var/lib/apt/lists/*
 
