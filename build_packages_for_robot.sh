@@ -4,10 +4,15 @@ set -eo pipefail
 IFS=$'\n\t'
 PROJECT_NAME=tortoisebot_rmf
 
-# Install ros2 humble bare bones
-cd $HOME/ros_ws/src/$PROJECT_NAME
-chmod +x install_ros_humble_barebone.sh
-./install_ros_humble_barebone.sh
+# Check if ROS 2 Humble is installed, if not, install it
+if [ ! -f /opt/ros/humble/setup.bash ]; then
+    echo "ROS 2 Humble not found. Installing..."
+    cd $HOME/ros_ws/src/$PROJECT_NAME
+    chmod +x install_ros_humble_barebone.sh
+    ./install_ros_humble_barebone.sh
+else
+    echo "ROS 2 Humble is already installed."
+fi
 
 # Install deps
 cd $HOME/ros_ws/src/$PROJECT_NAME/docker
@@ -21,6 +26,11 @@ sudo rosdep init
 rosdep update
 
 # Build tortoisebot package
-cd $HOME/ros_ws/src/$PROJECT_NAME
-chmod +x install_tortoisebot.sh
-./install_tortoisebot.sh
+if [ ! -d "$HOME/ros_dep_ws" ]; then
+    echo "Directory ros_dep_ws not found in $HOME. Creating it..."
+    cd $HOME/ros_ws/src/$PROJECT_NAME
+    chmod +x install_tortoisebot.sh
+    ./install_tortoisebot.sh
+else
+    echo "Directory ros_dep_ws already exists in $HOME. Skipping TortoiseBot installation."
+fi
