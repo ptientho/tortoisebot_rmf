@@ -5,9 +5,6 @@ cd ~/ros_dep_ws/
 colcon build
 source ~/ros_dep_ws/install/setup.bash
 
-# Install dependencies
-sudo apt install -y ros-$ROS_DISTRO-gazebo-plugin 
-
 # Clone TortoiseBot repository
 cd ~/ros_dep_ws/src
 git clone -b ros2-humble https://github.com/rigbetellabs/tortoisebot.git
