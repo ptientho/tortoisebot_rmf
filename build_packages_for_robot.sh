@@ -17,6 +17,7 @@ sudo rm -rf /var/lib/apt/lists/*
 
 # Upgrade and update
 sudo apt update && sudo apt upgrade -y
+sudo rosdep init
 rosdep update
 
 # Build tortoisebot package
