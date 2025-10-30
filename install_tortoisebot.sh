@@ -8,7 +8,7 @@ source ~/ros_dep_ws/install/setup.bash
 
 # Clone TortoiseBot repository
 cd ~/ros_dep_ws/src
-git clone -b ros2-humble https://github.com/rigbetellabs/tortoisebot.git
+git clone -b ros2-humble https://github.com/ptientho/tortoisebot.git
 
 # Check if REMOTE_PC environment variable is not set to true
 if [ "$REMOTE_PC" != "true" ]; then
