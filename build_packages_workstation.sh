@@ -23,7 +23,11 @@ sudo rm -rf /var/lib/apt/lists/*
 
 # Upgrade and update
 sudo apt update && sudo apt upgrade -y
-sudo rosdep init
+if [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
+    sudo rosdep init
+else
+    echo "Default sources list already exists. Skipping rosdep init."
+fi
 rosdep update
 
 # Check if Gazebo is installed
