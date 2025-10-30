@@ -33,6 +33,7 @@ ros-humble-urdf
 ros-humble-tf-transformations
 ros-humble-camera-ros
 ros-humble-libcamera
+ros-humble-v4l2-camera
 software-properties-common
 sudo
 tmux

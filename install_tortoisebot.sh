@@ -21,7 +21,7 @@ if [ "$REMOTE_PC" != "true" ]; then
     # Build packages
     cd ~/ros_dep_ws
     rosdep install -y -i --from-paths src
-    colcon build --parallel-workers 1
+    colcon build --parallel-workers 1 --packages-ignore v4l2_camera
 else
     # Build packages ignoring ydlidar_sdk ydlidar_ros2_driver v4l2_camera
     cd ~/ros_dep_ws
