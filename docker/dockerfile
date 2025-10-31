@@ -1,4 +1,4 @@
-FROM osrf/ros:humble-desktop-full
+FROM ghcr.io/open-rmf/rmf/rmf_demos:humble-rmf-latest
 
 # Arguments for building
 ARG USERID
@@ -13,17 +13,6 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 COPY docker/requirements.txt .
 RUN apt-get update && apt-get install --no-install-recommends -y $(cat requirements.txt) && rm -rf /var/lib/apt/lists/*
 RUN rm requirements.txt
-
-# Install Gazebo Classic version 11 from source
-COPY install_gazebo_from_source.sh .
-RUN chmod +x install_gazebo_from_source.sh
-RUN ./install_gazebo_from_source.sh
-
-# Install Gazebo Fortress
-RUN sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-fortress.list'
-RUN wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
-RUN sudo apt-get update
-RUN sudo apt-get install ignition-fortress -y
 
 # Create a user with passwordless sudo
 RUN adduser --uid $USERID --gecos "ekumen developer" --disabled-password $USER
@@ -45,10 +34,8 @@ RUN sudo apt upgrade -y && sudo apt update && rosdep update
 RUN mkdir -p /home/$USER/ros_deps_ws/src
 WORKDIR /home/$USER/ros_deps_ws/src
 # Clone tortoisebot pkg
-RUN git clone -b ros2-humble https://github.com/rigbetellabs/tortoisebot.git
+RUN git clone -b ros2-humble https://github.com/ptientho/tortoisebot.git
 WORKDIR /home/$USER/ros_deps_ws
-# Clone rmf-demos-tasks
-RUN git clone https://github.com/open-rmf/rmf_demos.git -b humble
 # Rosdep install
 RUN . /opt/ros/humble/setup.sh && rosdep install -y -i --from-paths src
 # Build but ignore ydlidar_sdk, ydlidar_ros2_driver, v4l2_camera since lidar will not be connected to remote-pc.
@@ -65,19 +52,8 @@ RUN echo "source /opt/ros/humble/setup.bash" >> /home/$USER/.bashrc
 # Adds colcon autocomplete
 RUN echo "source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash" >> /home/$USER/.bashrc
 
-
-#########################
-# Pip installation setup
-#########################
-RUN sudo pip install nudged transforms3d
-
-#########################
-# Workspace configuration
-#########################
-
 # Creates the src folder of the workspace.
 RUN mkdir -p /home/$USER/ws/src
-
 
 # Defines a workspace folder.
 WORKDIR /home/$USER/ws

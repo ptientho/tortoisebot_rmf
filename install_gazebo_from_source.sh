@@ -152,8 +152,8 @@ echo "Configuring CMake (tutorial suggests cmake ../ or cmake -DCMAKE_BUILD_TYPE
 # Use INSTALL_PREFIX if non-default as tutorial suggests custom install path
 cmake -DCMAKE_INSTALL_PREFIX="${INSTALL_PREFIX}" ../
 
-echo "Running make (tutorial: make -j4 example; we use available cores)..."
-make -j"$(nproc)"
+echo "Running make (tutorial: make -j4)"
+make -j4
 
 echo "Running sudo make install (tutorial step)..."
 sudo make install

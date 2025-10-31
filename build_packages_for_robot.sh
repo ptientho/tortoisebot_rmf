@@ -4,6 +4,11 @@ set -eo pipefail
 IFS=$'\n\t'
 PROJECT_NAME=tortoisebot_rmf
 
+# Setup environment
+export TERM=linux
+export DEBIAN_FRONTEND=noninteractive
+echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+
 # Check if ROS 2 Humble is installed, if not, install it
 if [ ! -f /opt/ros/humble/setup.bash ]; then
     echo "ROS 2 Humble not found. Installing..."
@@ -17,8 +22,8 @@ fi
 # Install deps
 cd $HOME/ros_ws/src/$PROJECT_NAME/docker
 sudo apt update && sudo apt upgrade -y --fix-missing
-sudo apt-get install -y --no-install-recommends $(cat requirements_robot.txt)
-sudo rm -rf /var/lib/apt/lists/*
+sudo apt-get install -y --no-install-recommends $(cat requirements_robot.txt) \
+    && rm -rf /var/lib/apt/lists/*
 
 # Upgrade and update
 sudo apt update && sudo apt upgrade -y

@@ -18,7 +18,7 @@ curl -L -o /tmp/ros2-apt-source.deb "https://github.com/ros-infrastructure/ros-a
 sudo dpkg -i /tmp/ros2-apt-source.deb
 
 # Install ROS 2 packages
-sudo apt update && sudo apt upgrade
+sudo apt update && sudo apt upgrade -y
 
 # Install ROS2 Humble (Bare Bones)
 sudo apt install -y ros-humble-ros-base ros-dev-tools
